@@ -1,9 +1,9 @@
 import React from "react";
 import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Auth0ProviderWithNavigate = ({ children }: Props) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   //import.meta.env: This is a special meta object available in ECMAScript modules,
   //which provides access to environment-specific metadata.
@@ -23,7 +23,7 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   const onRedirectCallback = (appState?: AppState, user?: User) => {
     console.log("User:", user);
     //after sign in return to the previous page
-    navigate(appState?.returnTo || "/auth-callback");
+    //navigate(appState?.returnTo || "/auth-callback");
   };
 
   return (

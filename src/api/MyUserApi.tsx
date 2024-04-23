@@ -10,9 +10,13 @@ type CreateUserRequest = {
 
 export const useCreateMyUser = () => {
     const createMyUserRequest = async (user: CreateUserRequest) => {
+        //parameters for fetch are
+        //url to send the data
+        //set of options need to send the req data
         const response = await fetch(`${API_BASE_URL}/api/my/user`, {
             method: "POST",
             headers: {
+                //says the BE server what type use to send data in request
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(user),

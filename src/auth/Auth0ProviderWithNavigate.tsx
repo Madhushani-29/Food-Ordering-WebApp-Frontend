@@ -1,11 +1,9 @@
 import React from "react";
 import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
-import { useCreateMyUser } from "@/api/MyUserApi";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Auth0ProviderWithNavigate = ({ children }: Props) => {
-  const { createUser } = useCreateMyUser();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   //import.meta.env: This is a special meta object available in ECMAScript modules,
   //which provides access to environment-specific metadata.
@@ -22,13 +20,11 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   }
 
   //app state hold the use status data like the previous url
+  //auth call back use like this with another route since it need to be wrapped inside the auth provider
+  //when use like, all routes are wrapped with auth provider
   const onRedirectCallback = (appState?: AppState, user?: User) => {
-    if (user?.sub && user?.email) {
-      createUser({ auth0ID: user.sub, email: user.email });
-    }
     console.log("User:", user);
-    //after sign in return to the previous page
-    //navigate(appState?.returnTo || "/auth-callback");
+    navigate(/*appState?.returnTo || */"/auth-callback");
   };
 
   return (

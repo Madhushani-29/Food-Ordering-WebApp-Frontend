@@ -14,9 +14,7 @@ const AuthCallbackPage = () => {
         //hasCreatedUser use to make sure only once call the create function
         if (user?.sub && user?.email && !hasCreatedUser.current) {
             createUser({ auth0ID: user.sub, email: user.email });
-            console.log(hasCreatedUser.current);
             hasCreatedUser.current = true;
-            console.log(hasCreatedUser.current);
         }
         navigate("/");
     }, [createUser, navigate, user]);

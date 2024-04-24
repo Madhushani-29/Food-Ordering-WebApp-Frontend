@@ -14,16 +14,18 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientID = import.meta.env.VITE_AUTH0_CLIENT_ID;
   const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL;
+  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-  if (!domain || !clientID || !redirectUri) {
-    throw new Error("Unable to initialize auth");
+  if (!domain || !clientID || !redirectUri || !audience) {
+    throw new Error("Unable to initialise auth");
   }
 
   //app state hold the use status data like the previous url
   //auth call back use like this with another route since it need to be wrapped inside the auth provider
   //when use like, all routes are wrapped with auth provider
   const onRedirectCallback = () => {
-    navigate(/*appState?.returnTo || */"/auth-callback");
+    console.log("hiii")
+    navigate("/auth-callback");
   };
 
   return (
@@ -32,7 +34,10 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
     <Auth0Provider
       domain={domain}
       clientId={clientID}
-      authorizationParams={{ redirect_uri: redirectUri }}
+      authorizationParams={{
+        redirect_uri: redirectUri,
+        //audience
+      }}
       onRedirectCallback={onRedirectCallback}
     >
       {children}

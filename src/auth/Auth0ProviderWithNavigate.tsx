@@ -24,7 +24,7 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   //app state hold the use status data like the previous url
   const onRedirectCallback = (appState?: AppState, user?: User) => {
     if (user?.sub && user?.email) {
-      createUser({ auth0Id: user.sub, email: user.email });
+      createUser({ auth0ID: user.sub, email: user.email });
     }
     console.log("User:", user);
     //after sign in return to the previous page

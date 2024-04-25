@@ -30,6 +30,7 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   return (
     //This provider will manage authentication state and
     //provide authentication-related functionality to the child components of your application
+    //audience use in token verify
     <Auth0Provider
       domain={domain}
       clientId={clientID}

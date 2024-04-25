@@ -1,6 +1,10 @@
+import UserProfileForm from "@/forms/user-profile-form/UserProfileForm"
+
 const UserProfilePage = () => {
   return (
-    <div><b>User Profile</b></div>
+    <>
+      <UserProfileForm />
+    </>
   )
 }
 

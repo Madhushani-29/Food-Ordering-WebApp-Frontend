@@ -24,7 +24,6 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   //auth call back use like this with another route since it need to be wrapped inside the auth provider
   //when use like, all routes are wrapped with auth provider
   const onRedirectCallback = () => {
-    console.log("hiii")
     navigate("/auth-callback");
   };
 
@@ -36,7 +35,7 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
       clientId={clientID}
       authorizationParams={{
         redirect_uri: redirectUri,
-        //audience
+        audience
       }}
       onRedirectCallback={onRedirectCallback}
     >

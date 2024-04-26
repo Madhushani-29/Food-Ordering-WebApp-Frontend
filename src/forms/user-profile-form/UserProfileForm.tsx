@@ -5,6 +5,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { User } from "@/types";
 
 //properties that the form have
 const formSchema = z.object({
@@ -26,16 +27,18 @@ type Props = {
     isLoading: boolean;
     title?: string;
     buttonText?: string;
+    currentUser?: User;
 }
 
-const UserProfileForm = ({ onSave, isLoading, title = "User Profile", buttonText = "Submit", }: Props) => {
+const UserProfileForm = ({ onSave, isLoading, currentUser, title = "User Profile", buttonText = "Submit", }: Props) => {
     // line initializes a form using the useForm hook
     //specifies the generic type UserFormData, which likely represents the shape of the form data
     const form = useForm<UserFormData>({
         //configures the form's resolver. The resolver is responsible for validating the form data
         //zodResolver is used, indicating that Zod schema validation will be used. 
         //formSchema is the validation rules for the form.
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: currentUser
     });
 
     return (

@@ -1,9 +1,12 @@
+import { useUpdateMyUser } from "@/api/MyUserApi"
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm"
 
 const UserProfilePage = () => {
+  const { updateUser, isLoading } = useUpdateMyUser();
   return (
     <>
-      <UserProfileForm />
+      { /*form data structure and update user */}
+      <UserProfileForm isLoading={isLoading} onSave={updateUser} />
     </>
   )
 }

@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 import AppRoutes from './AppRoutes'
 import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate'
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from 'sonner'
 
 //query client-central component in the react-query library responsible for managing cache, data fetching, and mutation operations
 const queryClient = new QueryClient({
@@ -25,6 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <Auth0ProviderWithNavigate>
           <AppRoutes />
+          {/*Placing the Toaster component at the top level ensures that it is 
+          accessible from any part of the application*/}
+          <Toaster visibleToasts={1} position='top-right' richColors />
         </Auth0ProviderWithNavigate>
       </QueryClientProvider>
     </Router>

@@ -62,8 +62,10 @@ type UpdateMyUserRequest = {
 
 export const useUpdateMyUser = () => {
     const { getAccessTokenSilently } = useAuth0();
+
     const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
         const accessToken = await getAccessTokenSilently();
+
         const response = await fetch(`${API_BASE_URL}/api/my/user`, {
             method: "PUT",
             headers: {
@@ -85,7 +87,7 @@ export const useUpdateMyUser = () => {
         isLoading,
         isSuccess,
         error,
-        reset
+        reset,
     } = useMutation(updateMyUserRequest);
 
     if (isSuccess) {
@@ -94,8 +96,6 @@ export const useUpdateMyUser = () => {
 
     if (error) {
         toast.error(error.toString());
-        //reset function is a part of the React Query library. 
-        //It's used to reset the state of a mutation to its initial state
         reset();
     }
 

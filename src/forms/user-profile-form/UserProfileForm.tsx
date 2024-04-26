@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { User } from "@/types";
+import { useEffect } from "react";
 
 //properties that the form have
 const formSchema = z.object({
@@ -40,6 +41,11 @@ const UserProfileForm = ({ onSave, isLoading, currentUser, title = "User Profile
         resolver: zodResolver(formSchema),
         defaultValues: currentUser
     });
+
+    //when the current user state changes the foem need to re render
+    useEffect(() => {
+        form.reset(currentUser);
+    }, [currentUser, form]);
 
     return (
         //...form spreads all the properties and methods of the form object onto the Form component as individual props

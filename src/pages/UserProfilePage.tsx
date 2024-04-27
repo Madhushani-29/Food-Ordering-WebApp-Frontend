@@ -7,11 +7,11 @@ const UserProfilePage = () => {
   const { currentUser, isLoading: isGetLoading } = useGetMyUser();
 
   if (isGetLoading) {
-    <span>Loading...</span>
+    return <span>Loading...</span>
   }
 
   if (!currentUser) {
-    <span>Unable to load the user...</span>
+    return <span>Unable to load the user...</span>
   }
 
   return (

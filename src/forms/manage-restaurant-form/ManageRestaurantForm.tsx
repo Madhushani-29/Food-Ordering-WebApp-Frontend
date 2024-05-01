@@ -56,6 +56,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Pro
     });
 
     const onSubmit = (formDataJson: RestaurantFormData) => {
+        console.log(formDataJson);
         //convert form data-json to form data object
         //there sending multipart/form-data to BE
         const formData = new FormData();
@@ -67,13 +68,15 @@ const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Pro
         formData.append("deliveryPrice", (formDataJson.deliveryPrice * 100).toString());
         formData.append("estimatedDeliveryTime", formDataJson.estimatedDeliveryTime.toString());
         formDataJson.cuisines.forEach((cuisine, index) => {
-            formData.append(`cuisine[${index}]`, cuisine);
+            formData.append(`cuisines[${index}]`, cuisine);
         });
         formDataJson.menuItems.forEach((menuItem, index) => {
             formData.append(`menuItems[${index}][name]`, menuItem.name);
             formData.append(`menuItems[${index}][price]`, (menuItem.price * 100).toString());
         });
-        formData.append("imageFile", formDataJson.imageFile);
+        if (formDataJson.imageFile) {
+            formData.append(`imageFile`, formDataJson.imageFile);
+        }
         onSave(formData);
     }
 

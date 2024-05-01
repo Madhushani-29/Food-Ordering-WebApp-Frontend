@@ -2,7 +2,6 @@ import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessa
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form"
 
-
 const DetailsSection = () => {
     const { control } = useFormContext();
 

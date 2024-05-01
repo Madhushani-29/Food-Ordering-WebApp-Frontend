@@ -20,9 +20,8 @@ export const useCreateMyRestaurant = () => {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to create user");
+            throw new Error("Failed to create restaurant!");
         }
-        
         return response.json();
     };
 
@@ -38,7 +37,7 @@ export const useCreateMyRestaurant = () => {
     }
 
     if (error) {
-        toast.error("Unable to update restaurant");
+        toast.error("Failed to create restaurant");
     }
 
     return { createRestaurant, isLoading };

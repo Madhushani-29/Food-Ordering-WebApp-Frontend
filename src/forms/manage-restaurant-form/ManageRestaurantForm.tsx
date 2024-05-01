@@ -56,7 +56,6 @@ const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Pro
     });
 
     const onSubmit = (formDataJson: RestaurantFormData) => {
-        console.log(formDataJson);
         //convert form data-json to form data object
         //there sending multipart/form-data to BE
         const formData = new FormData();

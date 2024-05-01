@@ -17,7 +17,6 @@ const UserProfilePage = () => {
   return (
     //form data structure and update user 
     <UserProfileForm currentUser={currentUser} isLoading={isUpdateLoading} onSave={updateUser} />
-
   )
 }
 

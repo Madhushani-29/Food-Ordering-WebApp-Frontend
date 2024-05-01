@@ -40,13 +40,13 @@ const formSchema = z.object({
 type RestaurantFormData = z.infer<typeof formSchema>;
 
 type Props = {
-    onSave: (restaurantFormData: RestaurantFormData) => void;
+    onSave: (restaurantFormData: FormData) => void;
     isLoading: boolean;
     buttonText?: string;
     //currentUser?: User;
 }
 
-const ManageRestaurantForm = ({ /*onSave,*/ isLoading, buttonText = "Submit", }: Props) => {
+const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Props) => {
     const form = useForm<RestaurantFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -55,9 +55,26 @@ const ManageRestaurantForm = ({ /*onSave,*/ isLoading, buttonText = "Submit", }:
         }
     });
 
-    const onSubmit = (/*formDataJson: RestaurantFormData*/) => {
-        //convert form data json to form data object
-
+    const onSubmit = (formDataJson: RestaurantFormData) => {
+        //convert form data-json to form data object
+        //there sending multipart/form-data to BE
+        const formData = new FormData();
+        formData.append("restaurantName", formDataJson.restaurantName);
+        formData.append("city", formDataJson.city);
+        formData.append("country", formDataJson.country);
+        //when saving currency data need to convert the to lowest currency unit
+        //1GBP=100pence
+        formData.append("deliveryPrice", (formDataJson.deliveryPrice * 100).toString());
+        formData.append("estimatedDeliveryTime", formDataJson.estimatedDeliveryTime.toString());
+        formDataJson.cuisines.forEach((cuisine, index) => {
+            formData.append(`cuisine[${index}]`, cuisine);
+        });
+        formDataJson.menuItems.forEach((menuItem, index) => {
+            formData.append(`menuItems[${index}][name]`, menuItem.name);
+            formData.append(`menuItems[${index}][price]`, (menuItem.price * 100).toString());
+        });
+        formData.append("imageFile", formDataJson.imageFile);
+        onSave(formData);
     }
 
     return (

@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import CuisinesSection from "./CuisinesSection";
 import MenuSection from "./MenuSection";
 import ImageSection from "./ImageSection";
+import { Restaurant } from "@/types";
+import { useEffect } from "react";
 
 const formSchema = z.object({
     restaurantName: z.string({ required_error: "Restaurant name is required" }),
@@ -43,10 +45,10 @@ type Props = {
     onSave: (restaurantFormData: FormData) => void;
     isLoading: boolean;
     buttonText?: string;
-    //currentUser?: User;
+    currentRestaurant?: Restaurant;
 }
 
-const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Props) => {
+const ManageRestaurantForm = ({ onSave, isLoading, currentRestaurant }: Props) => {
     const form = useForm<RestaurantFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -54,6 +56,30 @@ const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Pro
             menuItems: [{ name: "", price: 0 }]
         }
     });
+
+    useEffect(() => {
+        if (!currentRestaurant) {
+            return;
+        }
+
+        // price lowest domination of 100 = 100pence == 1GBP
+        const deliveryPriceFormatted = parseInt(
+            (currentRestaurant.deliveryPrice / 100).toFixed(2)
+        );
+
+        const menuItemsFormatted = currentRestaurant.menuItems.map((item) => ({
+            ...item,
+            price: parseInt((item.price / 100).toFixed(2)),
+        }));
+
+        const updatedRestaurant = {
+            ...currentRestaurant,
+            deliveryPrice: deliveryPriceFormatted,
+            menuItems: menuItemsFormatted,
+        };
+
+        form.reset(updatedRestaurant);
+    }, [form, currentRestaurant]);
 
     const onSubmit = (formDataJson: RestaurantFormData) => {
         //convert form data-json to form data object
@@ -99,7 +125,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, buttonText = "Submit", }: Pro
                     <LoadingButton />
                 ) : (
                     <Button type="submit" className="bg-orange-500">
-                        {buttonText}
+                        Submit
                     </Button>
                 )}
             </form>

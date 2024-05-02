@@ -21,7 +21,7 @@ export const useGetMyUser = () => {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to fetch user");
+            throw new Error("Failed to fetch user!");
         }
 
         return response.json();
@@ -75,7 +75,7 @@ export const useCreateMyUser = () => {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to create user");
+            throw new Error("Failed to create user!");
         }
     };
 
@@ -86,15 +86,11 @@ export const useCreateMyUser = () => {
     const {
         mutateAsync: createUser,
         isLoading,
-        isError,
-        isSuccess,
     } = useMutation(createMyUserRequest);
 
     return {
         createUser,
         isLoading,
-        isError,
-        isSuccess,
     };
 };
 
@@ -121,7 +117,7 @@ export const useUpdateMyUser = () => {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to update user");
+            throw new Error("Failed to update user!");
         }
 
         return response.json();

@@ -128,6 +128,8 @@ export const useUpdateMyUser = () => {
         isLoading,
         isSuccess,
         error,
+        // resets the state of the mutation to its initial state, 
+        // clearing any temporary data like isLoading, isSuccess, and error
         reset,
     } = useMutation(updateMyUserRequest);
 

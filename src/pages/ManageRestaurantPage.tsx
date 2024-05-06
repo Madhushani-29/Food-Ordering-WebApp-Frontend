@@ -6,6 +6,9 @@ const ManageRestaurantPage = () => {
   const { currentRestaurant, isLoading: isGetLoading } = useGetMyRestaurant();
   const { updateRestaurant, isLoading: isUpdateLoading } = useUpdateMyRestaurant();
 
+  // '!!' operator is a double negation, which coerces a value to its boolean equivalent
+  // When currentRestaurant is falsy (null, undefined, 0, false, or an empty string), 
+  // '!!'currentRestaurant will result in false
   const isEditing = !!currentRestaurant;
 
   if (isGetLoading) {

@@ -35,6 +35,8 @@ export const useGetMyUser = () => {
         data: currentUser,
         isLoading,
         error
+    //first argument passed to useQuery is a unique key, often used to identify the query
+    //second argument is typically a function that defines how to fetch the data
     } = useQuery("fetchCurrentUser", getMyUserRequest);
 
     if (error) {

@@ -1,4 +1,5 @@
 import { useSearchRestaurants } from "@/api/RestaurantAPI";
+import SearchResultInfo from "@/components/SearchResultInfo";
 import { useParams } from "react-router-dom";
 
 const SearchPage = () => {
@@ -19,7 +20,7 @@ const SearchPage = () => {
         Add cuisines here....
       </div>
       <div id="main-content" className="flex flex-col gap-5">
-        Main Content        
+        <SearchResultInfo city={city} total={results.pagination.total}/>     
       </div>
     </div>
   );

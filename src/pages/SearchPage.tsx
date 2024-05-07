@@ -98,8 +98,10 @@ const SearchPage = () => {
           onReset={resetSearch}
           searchQuery={searchState.searchQuery}
         />
-        <SearchResultInfo city={city} total={results.pagination.total} />
-        <SortOptionDropdown onChange={setSortOption} sortOption={searchState.sortOption} />
+        <div className="flex justify-between flex-col gap-3 lg:flex-row">
+          <SearchResultInfo city={city} total={results.pagination.total} />
+          <SortOptionDropdown onChange={setSortOption} sortOption={searchState.sortOption} />
+        </div>
         {results.data.map((restaurant) => (
           <SearchResultCard restaurant={restaurant} />
         ))}

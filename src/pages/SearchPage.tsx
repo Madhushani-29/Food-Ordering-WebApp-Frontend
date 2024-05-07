@@ -5,16 +5,22 @@ const SearchPage = () => {
   const { city } = useParams();
   const { results, isLoading } = useSearchRestaurants(city);
 
-  if (isLoading){
-    return <span>
-      Loading...
-    </span>
+  if (isLoading) {
+    <span>Loading ...</span>;
   }
+
+  if (!results?.data || !city) {
+    return <span>No results found</span>;
+  }
+
   return (
-    <div>
-      {results?.data.map((restaurant) =>
-        <div>found - {restaurant.restaurantName} {restaurant.city}</div>
-      )}
+    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
+      <div id="cuisines-list">
+        Add cuisines here....
+      </div>
+      <div id="main-content" className="flex flex-col gap-5">
+        Main Content        
+      </div>
     </div>
   );
 };

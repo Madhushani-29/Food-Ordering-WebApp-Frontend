@@ -4,13 +4,15 @@ import PaginationSelector from "@/components/PaginationSelector";
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import SearchResultCard from "@/components/SearchResultCard";
 import SearchResultInfo from "@/components/SearchResultInfo";
+import SortOptionDropdown from "@/components/SortOptionDropdown";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 export type SearchState = {
   searchQuery: string;
-  page: number
-  selectedCuisines: string[]
+  page: number;
+  selectedCuisines: string[];
+  sortOption: string;
 };
 
 const SearchPage = () => {
@@ -20,7 +22,8 @@ const SearchPage = () => {
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: "",
     page: 1,
-    selectedCuisines: []
+    selectedCuisines: [],
+    sortOption: "bestMatch"
   });
 
   //used in the top level since the code clean and when expand it will rerender the component
@@ -67,6 +70,15 @@ const SearchPage = () => {
     }));
   }
 
+  const setSortOption = (value: string) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      sortOption: value,
+      //value also can use shortly
+      page: 1
+    }));
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
       <div id="cuisines-list">
@@ -87,6 +99,7 @@ const SearchPage = () => {
           searchQuery={searchState.searchQuery}
         />
         <SearchResultInfo city={city} total={results.pagination.total} />
+        <SortOptionDropdown onChange={setSortOption} sortOption={searchState.sortOption} />
         {results.data.map((restaurant) => (
           <SearchResultCard restaurant={restaurant} />
         ))}

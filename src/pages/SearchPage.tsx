@@ -1,4 +1,5 @@
 import { useSearchRestaurants } from "@/api/RestaurantAPI";
+import SearchResultCard from "@/components/SearchResultCard";
 import SearchResultInfo from "@/components/SearchResultInfo";
 import { useParams } from "react-router-dom";
 
@@ -20,7 +21,10 @@ const SearchPage = () => {
         Add cuisines here....
       </div>
       <div id="main-content" className="flex flex-col gap-5">
-        <SearchResultInfo city={city} total={results.pagination.total}/>     
+        <SearchResultInfo city={city} total={results.pagination.total} />
+        {results.data.map((restaurant) => (
+          <SearchResultCard restaurant={restaurant} />
+        ))}
       </div>
     </div>
   );

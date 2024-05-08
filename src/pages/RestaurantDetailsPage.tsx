@@ -3,10 +3,25 @@ import { useParams } from "react-router-dom";
 import { AspectRatio } from "../components/ui/aspect-ratio";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import MenuItemCard from "@/components/MenuItemCard";
+import { useState } from "react";
+
+export type CartItem = {
+    _id: string;
+    name: string;
+    price: number;
+    quantity: number;
+};
 
 const RestaurantDetailsPage = () => {
     const { id } = useParams();
     const { isLoading, restaurant } = useGetRestaurantById(id);
+
+    const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+        // `cartItems-${restaurantId}` key for storing and retrieving cart items from the session storage
+        // their store the cart details for each restaurant separately
+        const storedCartItems = sessionStorage.getItem(`cartItems-${id}`);
+        return storedCartItems ? JSON.parse(storedCartItems) : [];
+    });
 
     if (isLoading) {
         <span>Loading ...</span>;

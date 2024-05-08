@@ -43,11 +43,9 @@ export const useSearchRestaurants = (searchState: SearchState, city?: string) =>
     };
 };
 
-export const useGetRestaurantById = (id: string) => {
+export const useGetRestaurantById = (id?: string) => {
     const createGetRestaurantByIdRequest = async (): Promise<Restaurant> => {
-        const params = new URLSearchParams();
-        params.set("id", id);
-        const response = await fetch(`${API_BASE_URL}/api/restaurant/${id}}`, {
+        const response = await fetch(`${API_BASE_URL}/api/restaurant/${id}`, {
             method: "GET",
         });
 
@@ -59,14 +57,14 @@ export const useGetRestaurantById = (id: string) => {
     };
 
     const {
-        data: results, isLoading } = useQuery(
+        data: restaurant, isLoading } = useQuery(
             "getRestaurantById",
             createGetRestaurantByIdRequest,
             { enabled: !!id }
         );
 
     return {
-        results,
+        restaurant,
         isLoading,
     };
 };

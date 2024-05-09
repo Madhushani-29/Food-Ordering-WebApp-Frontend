@@ -9,7 +9,7 @@ import OrderSummary from "@/components/OrderSummary";
 import { MenuItem } from "@/types";
 import CheckoutButton from "@/components/CheckoutButton";
 import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
-import { useUpdateMyUser } from "@/api/MyUserApi";
+
 export type CartItem = {
     _id: string;
     name: string;

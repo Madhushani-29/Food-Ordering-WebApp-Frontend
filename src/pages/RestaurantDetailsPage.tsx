@@ -62,6 +62,21 @@ const RestaurantDetailsPage = () => {
         });
     };
 
+    const removeFromCart = (cartItem: CartItem) => {
+        setCartItems((prevCartItems) => {
+            const updatedCartItems = prevCartItems.filter(
+                (item) => cartItem._id !== item._id
+            );
+
+            sessionStorage.setItem(
+                `cartItems-${id}`,
+                JSON.stringify(updatedCartItems)
+            );
+
+            return updatedCartItems;
+        });
+    };
+
     if (isLoading) {
         <span>Loading ...</span>;
     }
@@ -85,7 +100,7 @@ const RestaurantDetailsPage = () => {
                     {restaurant.menuItems.map((menuItem) => (
                         <MenuItemCard
                             menuItem={menuItem}
-                            addToCart={() => { addToCart(menuItem) }}
+                            addToCart={addToCart}
                         />
                     ))}
                 </div>
@@ -94,7 +109,7 @@ const RestaurantDetailsPage = () => {
                         <OrderSummary
                             restaurant={restaurant}
                             cartItems={cartItems}
-                        //removeFromCart={removeFromCart}
+                            removeFromCart={removeFromCart}
                         />
                         <CardFooter>
                             Checkout Button

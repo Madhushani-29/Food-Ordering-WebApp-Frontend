@@ -8,10 +8,10 @@ import { Badge } from "./ui/badge";
 export type Props = {
     restaurant: Restaurant;
     cartItems: CartItem[];
-    //removeFromCart: (cartItem: CartItem) => void;
+    removeFromCart: (cartItem: CartItem) => void;
 }
 
-const OrderSummary = ({ restaurant, cartItems, /*removeFromCart*/ }: Props) => {
+const OrderSummary = ({ restaurant, cartItems, removeFromCart }: Props) => {
     const getTotalCost = () => {
         //reduce() is a higher-order function used to iterate through an array and accumulate a single result. 
         //It takes a callback function as its argument, which is executed for each element of the array
@@ -50,7 +50,7 @@ const OrderSummary = ({ restaurant, cartItems, /*removeFromCart*/ }: Props) => {
                                 className="cursor-pointer"
                                 color="red"
                                 size={20}
-                            //onClick={() => removeFromCart(item)}
+                                onClick={() => removeFromCart(item)}
                             />
                             £{((item.price * item.quantity) / 100).toFixed(2)}
                         </span>

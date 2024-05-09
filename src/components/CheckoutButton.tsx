@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import LoadingButton from "./LoadingButton";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
+import UserProfileForm, { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 import { useGetMyUser } from "@/api/MyUserApi";
 
 export type Props = {
     disabled: boolean;
-    onCheckout: () => void;
+    onCheckout: (userFormData: UserFormData) => void;
 }
 
 const CheckoutButton = ({ disabled, onCheckout }: Props) => {
@@ -26,7 +26,7 @@ const CheckoutButton = ({ disabled, onCheckout }: Props) => {
         });
     };
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !currentUser) {
         return <Button className="bg-orange-500 flex-1" onClick={onLogin}>Log in to Checkout</Button>
     }
 

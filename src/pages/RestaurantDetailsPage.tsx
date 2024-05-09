@@ -77,6 +77,8 @@ const RestaurantDetailsPage = () => {
         });
     };
 
+    const onCheckout = () => { }
+
     if (isLoading) {
         <span>Loading ...</span>;
     }
@@ -114,7 +116,7 @@ const RestaurantDetailsPage = () => {
                         <CardFooter>
                             <CheckoutButton
                                 disabled={cartItems.length === 0}
-                                onCheckout={() => console.log("hi")}
+                                onCheckout={onCheckout}
                             />
                         </CardFooter>
                     </Card>

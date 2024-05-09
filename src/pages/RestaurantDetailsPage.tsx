@@ -8,6 +8,8 @@ import { Card, CardFooter } from "@/components/ui/card";
 import OrderSummary from "@/components/OrderSummary";
 import { MenuItem } from "@/types";
 import CheckoutButton from "@/components/CheckoutButton";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
+import { useUpdateMyUser } from "@/api/MyUserApi";
 export type CartItem = {
     _id: string;
     name: string;
@@ -18,6 +20,7 @@ export type CartItem = {
 const RestaurantDetailsPage = () => {
     const { id } = useParams();
     const { isLoading, restaurant } = useGetRestaurantById(id);
+    const { updateUser } = useUpdateMyUser();
 
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
         // `cartItems-${restaurantId}` key for storing and retrieving cart items from the session storage
@@ -77,7 +80,10 @@ const RestaurantDetailsPage = () => {
         });
     };
 
-    const onCheckout = () => { }
+    const onCheckout = (userFormData: UserFormData) => {
+        console.log("User Form Data: ", userFormData);
+        updateUser(userFormData);
+    }
 
     if (isLoading) {
         <span>Loading ...</span>;

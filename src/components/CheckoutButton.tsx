@@ -2,16 +2,21 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import LoadingButton from "./LoadingButton";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
+import { useGetMyUser } from "@/api/MyUserApi";
 
 export type Props = {
     disabled: boolean;
+    onCheckout: () => void;
 }
 
-const CheckoutButton = ({ disabled }: Props) => {
+const CheckoutButton = ({ disabled, onCheckout }: Props) => {
     //current path use to redirect after login
     const { pathname } = useLocation();
 
     const { isAuthenticated, isLoading: isAuthLoading, loginWithRedirect } = useAuth0();
+    const { currentUser } = useGetMyUser();
 
     const onLogin = async () => {
         await loginWithRedirect({
@@ -30,7 +35,22 @@ const CheckoutButton = ({ disabled }: Props) => {
     }
 
     return (
-        <Button className="bg-orange-500 flex-1" disabled={disabled}>Go to Checkout</Button>
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button disabled={disabled} className="bg-orange-500 flex-1">
+                    Go to checkout
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[425px] md:min-w-[700px] bg-gray-50">
+                <UserProfileForm
+                    currentUser={currentUser}
+                    onSave={onCheckout}
+                    isLoading={false}
+                    title="Confirm Deliery Details"
+                    buttonText="Continue to payment"
+                />
+            </DialogContent>
+        </Dialog>
     )
 }
 

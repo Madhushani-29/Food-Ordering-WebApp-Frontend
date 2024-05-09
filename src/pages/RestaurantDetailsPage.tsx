@@ -8,7 +8,6 @@ import { Card, CardFooter } from "@/components/ui/card";
 import OrderSummary from "@/components/OrderSummary";
 import { MenuItem } from "@/types";
 import CheckoutButton from "@/components/CheckoutButton";
-
 export type CartItem = {
     _id: string;
     name: string;
@@ -113,7 +112,10 @@ const RestaurantDetailsPage = () => {
                             removeFromCart={removeFromCart}
                         />
                         <CardFooter>
-                            <CheckoutButton disabled={cartItems.length === 0} />
+                            <CheckoutButton
+                                disabled={cartItems.length === 0}
+                                onCheckout={() => console.log("hi")}
+                            />
                         </CardFooter>
                     </Card>
                 </div>

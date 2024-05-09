@@ -20,7 +20,6 @@ export type CartItem = {
 const RestaurantDetailsPage = () => {
     const { id } = useParams();
     const { isLoading, restaurant } = useGetRestaurantById(id);
-    const { updateUser } = useUpdateMyUser();
 
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
         // `cartItems-${restaurantId}` key for storing and retrieving cart items from the session storage
@@ -82,7 +81,6 @@ const RestaurantDetailsPage = () => {
 
     const onCheckout = (userFormData: UserFormData) => {
         console.log("User Form Data: ", userFormData);
-        updateUser(userFormData);
     }
 
     if (isLoading) {

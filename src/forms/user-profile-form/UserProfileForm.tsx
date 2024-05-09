@@ -20,7 +20,7 @@ const formSchema = z.object({
 
 //UserFormData becomes a TypeScript type that represents the structure of the data 
 //that matches the schema defined by formSchema
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
     //onSave is a property representing a function with return type void

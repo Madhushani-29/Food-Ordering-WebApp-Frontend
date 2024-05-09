@@ -1,5 +1,5 @@
 import React from "react";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { AppState, Auth0Provider } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 const Auth0ProviderWithNavigate = ({ children }: Props) => {
@@ -23,8 +23,8 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
   //app state hold the use status data like the previous url
   //auth call back use like this with another route since it need to be wrapped inside the auth provider
   //when use like, all routes are wrapped with auth provider
-  const onRedirectCallback = () => {
-    navigate("/auth-callback");
+  const onRedirectCallback = (appState?: AppState) => {
+    navigate(appState?.returnTo || "/auth-callback");
   };
 
   return (

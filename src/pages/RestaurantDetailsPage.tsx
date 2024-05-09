@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Card, CardFooter } from "@/components/ui/card";
 import OrderSummary from "@/components/OrderSummary";
 import { MenuItem } from "@/types";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export type CartItem = {
     _id: string;
@@ -112,7 +113,7 @@ const RestaurantDetailsPage = () => {
                             removeFromCart={removeFromCart}
                         />
                         <CardFooter>
-                            Checkout Button
+                            <CheckoutButton disabled={cartItems.length === 0} />
                         </CardFooter>
                     </Card>
                 </div>

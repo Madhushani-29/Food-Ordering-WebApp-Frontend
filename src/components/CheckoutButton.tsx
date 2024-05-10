@@ -9,9 +9,10 @@ import { useGetMyUser } from "@/api/MyUserApi";
 export type Props = {
     disabled: boolean;
     onCheckout: (userFormData: UserFormData) => void;
+    isLoading: boolean
 }
 
-const CheckoutButton = ({ disabled, onCheckout }: Props) => {
+const CheckoutButton = ({ disabled, onCheckout, isLoading }: Props) => {
     //current path use to redirect after login
     const { pathname } = useLocation();
 
@@ -26,11 +27,11 @@ const CheckoutButton = ({ disabled, onCheckout }: Props) => {
         });
     };
 
-    if (!isAuthenticated || !currentUser) {
+    if (!isAuthenticated) {
         return <Button className="bg-orange-500 flex-1" onClick={onLogin}>Log in to Checkout</Button>
     }
 
-    if (isAuthLoading) {
+    if (isAuthLoading || !currentUser || isLoading) {
         return <LoadingButton />
     }
 

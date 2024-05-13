@@ -1,15 +1,15 @@
-import { Order, OrderStatus } from "@/types";
+import { Order } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "./ui/separator";
 import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "./ui/select";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "./ui/select";
 import { ORDER_STATUS } from "@/config/order-status-config";
 
 export type Props = {
@@ -70,11 +70,7 @@ const OrderItemCard = ({ order }: Props) => {
                 </div>
                 <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="status">What is the status of this order?</Label>
-                    {/* <Select
-                        value={status}
-                        //disabled={isLoading}
-                        //onValueChange={(value) => handleStatusChange(value as OrderStatus)}
-                    >
+                    <Select>
                         <SelectTrigger id="status">
                             <SelectValue placeholder="Status" />
                         </SelectTrigger>
@@ -83,7 +79,7 @@ const OrderItemCard = ({ order }: Props) => {
                                 <SelectItem value={status.value}>{status.label}</SelectItem>
                             ))}
                         </SelectContent>
-                    </Select> */}
+                    </Select>
                 </div>
             </CardContent>
         </Card>

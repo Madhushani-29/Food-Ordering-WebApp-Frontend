@@ -7,7 +7,7 @@ const ManageRestaurantPage = () => {
   const { createRestaurant, isLoading: isCreateLoading } = useCreateMyRestaurant();
   const { currentRestaurant, isLoading: isGetLoading } = useGetMyRestaurant();
   const { updateRestaurant, isLoading: isUpdateLoading } = useUpdateMyRestaurant();
-  const { restaurantOrders, isLoading: isGetOrdersLoading } = useGetMyRestaurantOrders();
+  const { restaurantOrders } = useGetMyRestaurantOrders();
 
   // '!!' operator is a double negation, which coerces a value to its boolean equivalent
   // When currentRestaurant is falsy (null, undefined, 0, false, or an empty string), 

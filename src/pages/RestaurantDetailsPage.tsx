@@ -104,6 +104,7 @@ const RestaurantDetailsPage = () => {
 
         //await used since need to wait until return the url
         const data = await createCheckoutSession(checkoutData);
+        console.log("URL is", data.url)
         window.location.href = data.url;
     };
 
